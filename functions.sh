@@ -266,12 +266,9 @@ secure () {
 
 install_core () {
 
-  pwd
+  cd $HOME > /dev/null 2>&1
   curl -o install.sh https://raw.githubusercontent.com/solar-network/core/develop/install.sh > /dev/null 2>&1
-  bash install.sh
-  pwd
-  rm install.sh > /dev/null 2>&1
-  setefile
+  bash install.sh && rm install.sh
 
 }
 

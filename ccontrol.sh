@@ -65,8 +65,7 @@ main () {
       exit 1
     fi
 
-    sysinfo
-    $core/packages/core/bin/run update --height $1 --network $network --token $name
+    $core/packages/core/bin/run update --network $network --token $name
 
   elif [[ ( "$1" = "remove" ) && ( "$2" = "core" || -z "$2" ) && ( -z "$3" ) ]]; then
 
