@@ -22,7 +22,7 @@ ccontrol_completions () {
         COMPREPLY=( $(compgen -W "core self check" -- $cur) )
         ;;
       "remove")
-        COMPREPLY=( $(compgen -W "core self" -- $cur) )
+        COMPREPLY=( $(compgen -W "self" -- $cur) )
         ;;
       "secret")
         COMPREPLY=( $(compgen -W "set clear" -- $cur) )

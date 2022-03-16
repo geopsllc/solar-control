@@ -67,17 +67,6 @@ main () {
 
     $core/packages/core/bin/run update --network $network --token $name
 
-  elif [[ ( "$1" = "remove" ) && ( "$2" = "core" || -z "$2" ) && ( -z "$3" ) ]]; then
-
-    if [[ ! -d $data && ! -d $core ]]; then
-      echo -e "\n${red}Core not installed.${nc}\n"
-      exit 1
-    fi
-
-    sysinfo
-    sudo apt update > /dev/null 2>&1
-    remove
-
   elif [[ ( "$1" = "config" ) && ( "$2" = "reset"  ) && ( -z "$3" ) ]]; then
 
     if [[ ! -d $data || ! -d $core ]]; then
@@ -207,7 +196,7 @@ main () {
 
     git pull
 
-  elif [[ ( "$1" = "remove" ) && ( "$2" = "self" ) && ( -z "$3" ) ]]; then
+  elif [[ ( "$1" = "remove" ) && ( "$2" = "self" || -z "$2" ) && ( -z "$3" ) ]]; then
 
     selfremove
 

@@ -13,7 +13,7 @@ cd core-control
 | `install` | `core` | Install Core |
 | `reinstall` | `core` | Reinstall Core |
 | `update` | `core`/`self`/`check` | Update Core / Core-Control / Check |
-| `remove` | `core`/`self` | Remove Core / Core-Control |
+| `remove` | `self` | Remove Core-Control |
 | `secret` | `set`/`clear` | Delegate Secret Set / Clear |
 | `start` | `relay`/`forger`/`all` | Start Core Services |
 | `restart` | `relay`/`forger`/`all`/`safe` | Restart Core Services |
@@ -29,7 +29,7 @@ cd core-control
 This is a Streamlined CLI-Based Core v3 Management Tool. 
 - Installs fail2ban for ssh, and ufw allowing only ssh and the cores ports.
 - For start/restart/stop/status/logs you can skip the 'all' argument as it's the default.
-- For install/reinstall/remove you can skip the 'core' argument as it's the default.
+- For install/reinstall you can skip the 'core' argument as it's the default.
 - For update you can skip the 'check' argument as it's the default.
 - For system you can skip the 'info' argument as it's the default.
 - Using the 'restart safe' arguments requires the round-monitor core plugin and restarts the core services when safe to do so in 

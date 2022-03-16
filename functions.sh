@@ -9,7 +9,7 @@ wrong_arguments () {
   echo -e "| install   | core                         | Install Core                       |"
   echo -e "| reinstall | core                         | Reinstall Core                     |"
   echo -e "| update    | core / self / check          | Update Core / Core-Control / Check |"
-  echo -e "| remove    | core / self                  | Remove Core / Core-Control         |"
+  echo -e "| remove    | self                         | Remove Core-Control                |"
   echo -e "| secret    | set / clear                  | Delegate Secret Set / Clear        |"
   echo -e "| start     | relay / forger / all         | Start Core Services                |"
   echo -e "| restart   | relay / forger / all / safe  | Restart Core Services              |"
@@ -269,18 +269,6 @@ install_core () {
   cd $HOME > /dev/null 2>&1
   curl -o install.sh https://raw.githubusercontent.com/solar-network/core/develop/install.sh > /dev/null 2>&1
   bash install.sh
-
-}
-
-remove () {
-
-  pm2 delete ${name}-forger > /dev/null 2>&1
-  pm2 delete ${name}-relay > /dev/null 2>&1
-  pm2 save > /dev/null 2>&1
-  sudo ufw delete allow $p2p_port/tcp > /dev/null 2>&1
-  sudo ufw delete allow $api_port/tcp > /dev/null 2>&1
-
-  $core/packages/core/bin/run uninstall --network $network --token $name
 
 }
 
