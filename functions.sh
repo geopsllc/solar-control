@@ -268,11 +268,7 @@ install_core () {
 
   cd $HOME > /dev/null 2>&1
   curl -o install.sh https://raw.githubusercontent.com/solar-network/core/develop/install.sh > /dev/null 2>&1
-  bash install.sh &
-  while [ -d /proc/$! ]; do
-      sleep .1
-  done
-  rm install.sh
+  bash install.sh
 
 }
 
