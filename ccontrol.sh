@@ -56,7 +56,7 @@ main () {
     fi
 
     sysinfo
-    solar reinstall
+    $core/packages/core/bin/run reinstall --network $network --token $name
 
   elif [[ ( "$1" = "update" ) && ( "$2" = "core" ) && ( -z "$3" ) ]]; then
 
@@ -66,7 +66,7 @@ main () {
     fi
 
     sysinfo
-    solar update
+    $core/packages/core/bin/run update --height $1 --network $network --token $name
 
   elif [[ ( "$1" = "remove" ) && ( "$2" = "core" || -z "$2" ) && ( -z "$3" ) ]]; then
 

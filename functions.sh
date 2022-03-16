@@ -266,8 +266,10 @@ secure () {
 
 install_core () {
 
+  pwd
   curl -o install.sh https://raw.githubusercontent.com/solar-network/core/develop/install.sh > /dev/null 2>&1
   bash install.sh
+  pwd
   rm install.sh > /dev/null 2>&1
   setefile
 
@@ -278,15 +280,10 @@ remove () {
   pm2 delete ${name}-forger > /dev/null 2>&1
   pm2 delete ${name}-relay > /dev/null 2>&1
   pm2 save > /dev/null 2>&1
-  solar uninstall
-  rm -rf $core > /dev/null 2>&1
-  rm -rf $data > /dev/null 2>&1
-  rm -rf $HOME/.cache/${name}-core > /dev/null 2>&1
-  rm -rf $HOME/.local/share/${name}-core > /dev/null 2>&1
-  rm -rf $HOME/.local/state/${name}-core > /dev/null 2>&1
-  rm -rf /tmp/$USER/${name}-core > /dev/null 2>&1
   sudo ufw delete allow $p2p_port/tcp > /dev/null 2>&1
   sudo ufw delete allow $api_port/tcp > /dev/null 2>&1
+
+  $core/packages/core/bin/run uninstall --network $network --token $name
 
 }
 
