@@ -25,3 +25,8 @@ fi
 if [ -f "$core/packages/core/package.json" ]; then
   corever=$(cat $core/packages/core/package.json | jq -r '.version')
 fi
+
+if [ -f "$HOME/install.sh" ]; then
+  rm $HOME/install.sh
+  setefile
+fi
