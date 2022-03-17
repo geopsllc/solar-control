@@ -267,7 +267,7 @@ secure () {
 install_core () {
 
   cd $HOME > /dev/null 2>&1
-  curl -o install.sh https://raw.githubusercontent.com/solar-network/core/develop/install.sh > /dev/null 2>&1
+  curl -o install.sh https://raw.githubusercontent.com/solar-network/core/main/install.sh > /dev/null 2>&1
   bash install.sh
 
 }
