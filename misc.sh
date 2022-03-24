@@ -13,6 +13,7 @@ nc='\033[0m'
 
 als="$(cat $HOME/.bashrc | grep ccontrol)"
 ccc="$(cat $HOME/.bashrc | grep cccomp)"
+env="$(cat $HOME/.bashrc | grep env)"
 
 if [ -z "$als" ]; then
   echo "alias ccontrol=$PWD/ccontrol.sh" >> $HOME/.bashrc
@@ -20,6 +21,10 @@ fi
 
 if [ -z "$ccc" ]; then
   echo "source $PWD/cccomp.bash" >> $HOME/.bashrc
+fi
+
+if [ -z "$env" ]; then
+  echo ". $HOME/.solar/.env" >> $HOME/.bashrc
 fi
 
 if [ -f "$core/packages/core/package.json" ]; then
