@@ -9,7 +9,7 @@ wrong_arguments () {
   echo -e "| install   | core                         | Install Core                       |"
   echo -e "| reinstall | core                         | Reinstall Core                     |"
   echo -e "| update    | core / self / check          | Update Core / Core-Control / Check |"
-  echo -e "| remove    | self                         | Remove Core-Control                |"
+  echo -e "| remove    | core / self                  | Remove Core / Core-Control         |"
   echo -e "| secret    | set / clear                  | Delegate Secret Set / Clear        |"
   echo -e "| start     | relay / forger / all         | Start Core Services                |"
   echo -e "| restart   | relay / forger / all / safe  | Restart Core Services              |"
@@ -242,7 +242,7 @@ status () {
 install_deps () {
 
   sudo timedatectl set-ntp no > /dev/null 2>&1
-  sudo apt install -y htop curl build-essential python git libpq-dev ntp gawk jq libjemalloc-dev > /dev/null 2>&1
+  sudo apt install -y htop curl build-essential python git ntp gawk jq > /dev/null 2>&1
 
 }
 
