@@ -13,7 +13,7 @@ cd core-control
 | `install` | `core` | Install Core |
 | `reinstall` | `core` | Reinstall Core |
 | `update` | `core`/`self`/`check` | Update Core / Core-Control / Check |
-| `remove` | `self` | Remove Core-Control |
+| `remove` | `core`/`self` | Remove Core / Core-Control |
 | `secret` | `set`/`clear` | Delegate Secret Set / Clear |
 | `start` | `relay`/`forger`/`all` | Start Core Services |
 | `restart` | `relay`/`forger`/`all`/`safe` | Restart Core Services |

@@ -196,7 +196,17 @@ main () {
 
     git pull
 
-  elif [[ ( "$1" = "remove" ) && ( "$2" = "self" || -z "$2" ) && ( -z "$3" ) ]]; then
+  elif [[ ( "$1" = "remove" ) && ( "$2" = "core" ) && ( -z "$3" ) ]]; then
+
+    if [[ ! -d $data || ! -d $core ]]; then
+      echo -e "\n${red}Core not installed. Please install first.${nc}\n"
+      exit 1
+    fi
+
+    sysinfo
+    $core/packages/core/bin/run uninstall --network $network --token $name
+    
+  elif [[ ( "$1" = "remove" ) && ( "$2" = "self" ) && ( -z "$3" ) ]]; then
 
     selfremove
 
