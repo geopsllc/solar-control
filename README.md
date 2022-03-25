@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-git clone https://github.com/geopsllc/solar-control -b dev
+git clone https://github.com/geopsllc/solar-control
 cd core-control
 ./ccontrol.sh arg1 [arg2]
 ```
