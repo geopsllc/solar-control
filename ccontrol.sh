@@ -65,7 +65,7 @@ main () {
       exit 1
     fi
 
-    $core/packages/core/bin/run update --network $network --token $name
+    $core/packages/core/bin/run update --network $network --token $name --force --restart
 
   elif [[ ( "$1" = "config" ) && ( "$2" = "reset"  ) && ( -z "$3" ) ]]; then
 
