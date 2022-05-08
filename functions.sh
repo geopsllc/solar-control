@@ -266,8 +266,6 @@ secure () {
 
 install_core () {
 
-  env="$(cat $HOME/.bashrc | grep env)"
-
   if [ -z "$env" ]; then
     echo ". $HOME/.solar/.env" >> $HOME/.bashrc
   fi
