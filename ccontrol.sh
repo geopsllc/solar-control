@@ -204,6 +204,11 @@ main () {
     fi
 
     sysinfo
+    
+    if [ ! -z "$env" ]; then
+      sed -i '/env/d' $HOME/.bashrc > /dev/null 2>&1
+    fi
+    
     $core/packages/core/bin/run uninstall --network $network --token $name
     
   elif [[ ( "$1" = "remove" ) && ( "$2" = "self" ) && ( -z "$3" ) ]]; then

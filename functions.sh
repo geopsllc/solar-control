@@ -266,6 +266,10 @@ secure () {
 
 install_core () {
 
+  if [ -z "$env" ]; then
+    echo ". $HOME/.solar/.env" >> $HOME/.bashrc
+  fi
+  
   cd $HOME > /dev/null 2>&1
   curl -o install.sh https://raw.githubusercontent.com/solar-network/core/$branch/install.sh > /dev/null 2>&1
   bash install.sh --network=$network
