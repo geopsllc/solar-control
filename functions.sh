@@ -76,7 +76,7 @@ start () {
     local rstatus=$(pm2status "${name}-relay" | awk '{print $4}')
 
     if [ "$rstatus" != "online" ]; then
-      solar relay:start > /dev/null 2>&1
+      /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run relay:start --token=solar > /dev/null 2>&1
     else
       echo -e "\n${red}Process relay already running. Skipping...${nc}"
     fi
@@ -84,7 +84,7 @@ start () {
     if [ "$secrets" = "[]" ]; then
       echo -e "\n${red}Delegate secret is missing. Forger start aborted!${nc}"
     elif [ "$fstatus" != "online" ]; then
-      solar forger:start > /dev/null 2>&1
+      /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run forger:start --token=solar > /dev/null 2>&1
     else
       echo -e "\n${red}Process forger already running. Skipping...${nc}"
     fi
@@ -102,7 +102,7 @@ start () {
     if [[ "$secrets" = "[]" && "$1" = "forger" ]]; then
       echo -e "\n${red}Delegate secret is missing. Forger start aborted!${nc}"
     elif [ "$pstatus" != "online" ]; then
-      solar ${1}:start > /dev/null 2>&1
+      /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run ${1}:start --token=solar > /dev/null 2>&1
     else
       echo -e "\n${red}Process $1 already running. Skipping...${nc}"
     fi
@@ -369,9 +369,9 @@ snapshot () {
   stop all > /dev/null 2>&1
 
   if [ "$1" = "restore" ]; then
-    solar snapshot:restore
+    /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run snapshot:restore --token=solar
   else
-    solar snapshot:dump
+    /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run snapshot:dump --token=solar
   fi
 
   if [ "$rstatus" = "online" ]; then
@@ -400,7 +400,7 @@ rollback () {
 
   stop all > /dev/null 2>&1
 
-  solar snapshot:rollback --height $1
+  /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run snapshot:rollback --height $1 --token=solar
 
   if [ "$rstatus" = "online" ]; then
     start relay > /dev/null 2>&1
