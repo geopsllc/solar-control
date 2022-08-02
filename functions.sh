@@ -16,7 +16,6 @@ wrong_arguments () {
   echo -e "| stop      | relay / forger / all         | Stop Core Services                 |"
   echo -e "| status    | relay / forger / all         | Show Core Services Status          |"
   echo -e "| logs      | relay / forger / all         | Show Core Logs                     |"
-  echo -e "| snapshot  | create / restore             | Snapshot Create / Restore          |"
   echo -e "| system    | info / update                | System Info / Update               |"
   echo -e "| config    | reset                        | Reset Config Files to Defaults     |"
   echo -e "| rollback  |                              | Rollback to Specified Height       |"
@@ -359,28 +358,6 @@ secret_set24 () {
   local scrt="$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} ${21} ${22} ${23} ${24}"
   jq --arg scrt "$scrt" '.secrets = [$scrt]' $config/delegates.json > delegates.tmp
   mv delegates.tmp $config/delegates.json
-
-}
-
-snapshot () {
-
-  local fstatus=$(pm2status "${name}-forger" | awk '{print $4}')
-  local rstatus=$(pm2status "${name}-relay" | awk '{print $4}')
-  stop all > /dev/null 2>&1
-
-  if [ "$1" = "restore" ]; then
-    /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run snapshot:restore --token=solar
-  else
-    /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run snapshot:dump --token=solar
-  fi
-
-  if [ "$rstatus" = "online" ]; then
-    start relay > /dev/null 2>&1
-  fi
-
-  if [ "$fstatus" = "online" ]; then
-    start forger > /dev/null 2>&1
-  fi
 
 }
 
