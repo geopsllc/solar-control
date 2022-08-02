@@ -76,7 +76,7 @@ start () {
     local rstatus=$(pm2status "${name}-relay" | awk '{print $4}')
 
     if [ "$rstatus" != "online" ]; then
-      pm2 --name "${name}-relay" start $core/packages/core/bin/run -- relay:run --network $network --token $name > /dev/null 2>&1
+      solar relay:start > /dev/null 2>&1
     else
       echo -e "\n${red}Process relay already running. Skipping...${nc}"
     fi
@@ -84,7 +84,7 @@ start () {
     if [ "$secrets" = "[]" ]; then
       echo -e "\n${red}Delegate secret is missing. Forger start aborted!${nc}"
     elif [ "$fstatus" != "online" ]; then
-      pm2 --name "${name}-forger" start $core/packages/core/bin/run -- forger:run --network $network --token $name > /dev/null 2>&1
+      solar forger:start > /dev/null 2>&1
     else
       echo -e "\n${red}Process forger already running. Skipping...${nc}"
     fi
@@ -102,7 +102,7 @@ start () {
     if [[ "$secrets" = "[]" && "$1" = "forger" ]]; then
       echo -e "\n${red}Delegate secret is missing. Forger start aborted!${nc}"
     elif [ "$pstatus" != "online" ]; then
-      pm2 --name "${name}-$1" start $core/packages/core/bin/run -- ${1}:run --network $network --token $name > /dev/null 2>&1
+      solar ${1}:start > /dev/null 2>&1
     else
       echo -e "\n${red}Process $1 already running. Skipping...${nc}"
     fi
@@ -369,9 +369,9 @@ snapshot () {
   stop all > /dev/null 2>&1
 
   if [ "$1" = "restore" ]; then
-    $core/packages/core/bin/run snapshot:restore --network $network --token $name
+    solar snapshot:restore
   else
-    $core/packages/core/bin/run snapshot:dump --network $network --token $name
+    solar snapshot:dump
   fi
 
   if [ "$rstatus" = "online" ]; then
@@ -400,7 +400,7 @@ rollback () {
 
   stop all > /dev/null 2>&1
 
-  $core/packages/core/bin/run snapshot:rollback --height $1 --network $network --token $name
+  solar snapshot:rollback --height $1
 
   if [ "$rstatus" = "online" ]; then
     start relay > /dev/null 2>&1
