@@ -20,7 +20,6 @@ cd core-control
 | `stop` | `relay`/`forger`/`all` | Stop Core Services |
 | `status` | `relay`/`forger`/`all` | Show Core Services Status |
 | `logs` | `relay`/`forger`/`all` | Show Core Logs |
-| `snapshot` | `create`/`restore` | Snapshot Create / Restore |
 | `system` | `info`/`update` | System Info / Update |
 | `config` | `reset` | Reset Config Files to Defaults |
 | `rollback` | | Rollback to Specified Height |
