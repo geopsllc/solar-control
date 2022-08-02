@@ -209,7 +209,7 @@ main () {
       sed -i '/env/d' $HOME/.bashrc > /dev/null 2>&1
     fi
     
-    solar uninstall
+    /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run uninstall --token=solar --force
     
   elif [[ ( "$1" = "remove" ) && ( "$2" = "self" ) && ( -z "$3" ) ]]; then
 
