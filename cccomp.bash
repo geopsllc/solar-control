@@ -9,7 +9,7 @@ ccontrol_completions () {
   prev=${COMP_WORDS[COMP_CWORD-1]}
 
   if [ $COMP_CWORD -eq 1 ]; then
-    COMPREPLY=( $(compgen -W "install reinstall update remove secret start restart stop status logs snapshot system config rollback" -- $cur) )
+    COMPREPLY=( $(compgen -W "install reinstall update remove secret start restart stop status logs system config rollback" -- $cur) )
   elif [ $COMP_CWORD -eq 2 ]; then
     case "$prev" in
       "install")
@@ -32,9 +32,6 @@ ccontrol_completions () {
         ;;
       "restart")
         COMPREPLY=( $(compgen -W "relay forger all safe" -- $cur) )
-        ;;
-      "snapshot")
-        COMPREPLY=( $(compgen -W "create restore" -- $cur) )
         ;;
       "system")
         COMPREPLY=( $(compgen -W "info update" -- $cur) )
