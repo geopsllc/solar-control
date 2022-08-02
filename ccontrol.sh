@@ -187,10 +187,15 @@ main () {
     fi
 
     sysinfo
-    
+    sudo apt update > /dev/null 2>&1
+        
     if [ ! -z "$env" ]; then
       sed -i '/env/d' $HOME/.bashrc > /dev/null 2>&1
     fi
+
+    rm $HOME/.pm2/dump* > /dev/null 2>&1
+    sudo ufw delete allow $p2p_port/tcp > /dev/null 2>&1
+    sudo ufw delete allow $api_port/tcp > /dev/null 2>&1
     
     /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run uninstall --token=solar --force
     
