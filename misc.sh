@@ -13,7 +13,13 @@ nc='\033[0m'
 als="$(cat $HOME/.bashrc | grep ccontrol)"
 ccc="$(cat $HOME/.bashrc | grep cccomp)"
 env="$(cat $HOME/.bashrc | grep env)"
-pmtwo="$(cat $HOME/.solarrc | grep env)"
+
+if [ -f "$HOME/.solarrc" ]; then
+  pmtwo="$(cat $HOME/.solarrc | grep env)"
+  if [ ! -z "$pmtwo" ]; then
+    sudo sed -i "/pm2/c alias pm2=\"/home/solar/.solar/.pnpm/bin/pm2\"" $HOME/.solarrc > /dev/null 2>&1
+  fi
+fi
 
 if [ -z "$als" ]; then
   echo "alias ccontrol=$PWD/ccontrol.sh" >> $HOME/.bashrc
@@ -30,8 +36,4 @@ fi
 if [ -f "$HOME/install.sh" ]; then
   rm $HOME/install.sh
   setefile
-fi
-
-if [ ! -z "$pmtwo" ]; then
-  sudo sed -i "/pm2/c alias pm2=\"/home/solar/.solar/.pnpm/bin/pm2\"" $HOME/.solarrc > /dev/null 2>&1
 fi
