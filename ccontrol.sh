@@ -193,9 +193,7 @@ main () {
       sed -i '/env/d' $HOME/.bashrc > /dev/null 2>&1
     fi
 
-    pm2 delete ${name}-forger > /dev/null 2>&1
-    pm2 delete ${name}-relay > /dev/null 2>&1
-    pm2 save > /dev/null 2>&1
+    rm $HOME/.pm2/dump* > /dev/null 2>&1
     sudo ufw delete allow $p2p_port/tcp > /dev/null 2>&1
     sudo ufw delete allow $api_port/tcp > /dev/null 2>&1
     
