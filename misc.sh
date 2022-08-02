@@ -10,7 +10,6 @@ magenta='\033[0;35m'
 cyan='\033[0;36m'
 nc='\033[0m'
 
-alias solar="/home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run $@ --token=solar"
 als="$(cat $HOME/.bashrc | grep ccontrol)"
 ccc="$(cat $HOME/.bashrc | grep cccomp)"
 env="$(cat $HOME/.bashrc | grep env)"
