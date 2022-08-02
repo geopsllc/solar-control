@@ -1,4 +1,4 @@
-# Core v3 Management Tool
+# Core v4 Management Tool
 
 ## Installation
 
@@ -25,7 +25,7 @@ cd core-control
 | `rollback` | | Rollback to Specified Height |
 
 ## General
-This is a Streamlined CLI-Based Core v3 Management Tool. 
+This is a Streamlined CLI-Based Core v4 Management Tool. 
 - Installs fail2ban for ssh, and ufw allowing only ssh and the cores ports.
 - For start/restart/stop/status/logs you can skip the 'all' argument as it's the default.
 - For install/reinstall you can skip the 'core' argument as it's the default.
