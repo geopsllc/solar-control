@@ -56,7 +56,7 @@ main () {
     fi
 
     sysinfo
-    /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run reinstall --token $name --force
+    $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run reinstall --token=$name --force
 
   elif [[ ( "$1" = "update" ) && ( "$2" = "core" ) && ( -z "$3" ) ]]; then
 
@@ -65,7 +65,7 @@ main () {
       exit 1
     fi
 
-    /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run update --token $name --restart
+    $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run update --token=$name --restart
 
   elif [[ ( "$1" = "config" ) && ( "$2" = "reset"  ) && ( -z "$3" ) ]]; then
 
@@ -188,7 +188,7 @@ main () {
 
     sysinfo
     sudo apt update > /dev/null 2>&1
-        
+
     if [ ! -z "$env" ]; then
       sed -i '/env/d' $HOME/.bashrc > /dev/null 2>&1
     fi
@@ -196,9 +196,9 @@ main () {
     rm $HOME/.pm2/dump* > /dev/null 2>&1
     sudo ufw delete allow $p2p_port/tcp > /dev/null 2>&1
     sudo ufw delete allow $api_port/tcp > /dev/null 2>&1
-    
-    /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run uninstall --token=solar --force
-    
+
+    $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run uninstall --token=$name --force
+
   elif [[ ( "$1" = "remove" ) && ( "$2" = "self" ) && ( -z "$3" ) ]]; then
 
     selfremove

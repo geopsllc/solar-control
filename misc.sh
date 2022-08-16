@@ -17,7 +17,7 @@ env="$(cat $HOME/.bashrc | grep env)"
 if [ -f "$HOME/.solarrc" ]; then
   pmtwo="$(cat $HOME/.solarrc | grep env)"
   if [ ! -z "$pmtwo" ]; then
-    sudo sed -i "/pm2/c alias pm2=\"/home/solar/.solar/.pnpm/bin/pm2\"" $HOME/.solarrc > /dev/null 2>&1
+    sudo sed -i "/pm2/c alias pm2=\"$HOME/.solar/.pnpm/bin/pm2\"" $HOME/.solarrc > /dev/null 2>&1
   fi
 fi
 
