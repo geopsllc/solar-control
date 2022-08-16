@@ -45,8 +45,11 @@ If you're running a forger and/or have custom settings, you should add them agai
 
 ## Changelog
 
+### 4.1
+- updated for Solar Core 4.1
+
 ### 4.0
-- updated for Solar Core 4.x
+- updated for Solar Core 4.0
 
 ### 3.2
 - initial release

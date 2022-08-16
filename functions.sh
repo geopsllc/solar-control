@@ -67,7 +67,7 @@ setefile () {
 
 start () {
 
-  local secrets=$(cat $config/delegates.json | jq -r '.secrets')
+  local keys=$(cat $config/delegates.json | jq -r '.keys')
 
   if [ "$1" = "all" ]; then
 
@@ -75,15 +75,15 @@ start () {
     local rstatus=$(pm2status "${name}-relay" | awk '{print $4}')
 
     if [ "$rstatus" != "online" ]; then
-      /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run relay:start --token=solar > /dev/null 2>&1
+      $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run relay:start --token=$name > /dev/null 2>&1
     else
       echo -e "\n${red}Process relay already running. Skipping...${nc}"
     fi
 
-    if [ "$secrets" = "[]" ]; then
+    if [ "$keys" = "[]" ]; then
       echo -e "\n${red}Delegate secret is missing. Forger start aborted!${nc}"
     elif [ "$fstatus" != "online" ]; then
-      /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run forger:start --token=solar > /dev/null 2>&1
+      $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run forger:start --token=$name > /dev/null 2>&1
     else
       echo -e "\n${red}Process forger already running. Skipping...${nc}"
     fi
@@ -98,10 +98,10 @@ start () {
 
     local pstatus=$(pm2status "${name}-$1" | awk '{print $4}')
 
-    if [[ "$secrets" = "[]" && "$1" = "forger" ]]; then
+    if [[ "$keys" = "[]" && "$1" = "forger" ]]; then
       echo -e "\n${red}Delegate secret is missing. Forger start aborted!${nc}"
     elif [ "$pstatus" != "online" ]; then
-      /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run ${1}:start --token=solar > /dev/null 2>&1
+      $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run ${1}:start --token=$name > /dev/null 2>&1
     else
       echo -e "\n${red}Process $1 already running. Skipping...${nc}"
     fi
@@ -268,7 +268,7 @@ install_core () {
   if [ -z "$env" ]; then
     echo ". $HOME/.solar/.env" >> $HOME/.bashrc
   fi
-  
+
   cd $HOME > /dev/null 2>&1
   curl -o install.sh https://raw.githubusercontent.com/solar-network/core/$branch/install.sh > /dev/null 2>&1
   bash install.sh --network=$network
@@ -340,7 +340,7 @@ logs () {
 
 secret_clear () {
 
-  jq '.secrets = []' $config/delegates.json > delegates.tmp
+  jq '.keys = []' $config/delegates.json > delegates.tmp
   mv delegates.tmp $config/delegates.json
 
 }
@@ -348,16 +348,14 @@ secret_clear () {
 secret_set12 () {
 
   local scrt="$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12}"
-  jq --arg scrt "$scrt" '.secrets = [$scrt]' $config/delegates.json > delegates.tmp
-  mv delegates.tmp $config/delegates.json
+  $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run config:forger --bip39="$scrt" --method=bip39 --token=$name
 
 }
 
 secret_set24 () {
 
   local scrt="$1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} ${21} ${22} ${23} ${24}"
-  jq --arg scrt "$scrt" '.secrets = [$scrt]' $config/delegates.json > delegates.tmp
-  mv delegates.tmp $config/delegates.json
+  $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run config:forger --bip39="$scrt" --method=bip39 --token=$name
 
 }
 
@@ -377,7 +375,7 @@ rollback () {
 
   stop all > /dev/null 2>&1
 
-  /home/solar/.solar/bin/node /home/solar/solar-core/packages/core/bin/run snapshot:rollback --height $1 --token=solar
+  $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run snapshot:rollback --height $1 --token=$name
 
   if [ "$rstatus" = "online" ]; then
     start relay > /dev/null 2>&1
