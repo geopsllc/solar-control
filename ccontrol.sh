@@ -65,7 +65,7 @@ main () {
       exit 1
     fi
 
-    $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run update --token=$name --restart
+    $HOME/.solar/bin/node $HOME/solar-core/packages/core/bin/run update --token=$name --force --restart
 
   elif [[ ( "$1" = "config" ) && ( "$2" = "reset"  ) && ( -z "$3" ) ]]; then
 
