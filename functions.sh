@@ -139,7 +139,7 @@ restart () {
 
   elif [ "$1" = "safe" ]; then
 
-    local api=$(curl -Is http://127.0.0.1:$(($p2p_port+1000)))
+    local api=$(curl -Is --unix-socket /tmp/solar/solar-core/mainnet/round-monitor.sock http://127.0.0.1)
     local fstatus=$(pm2status "${name}-forger" | awk '{print $4}')
     local rstatus=$(pm2status "${name}-relay" | awk '{print $4}')
 
@@ -150,7 +150,7 @@ restart () {
       echo -e "\n${red}Plugin round-monitor not active. Use '${cyan}ccontrol restart${red}' instead.${nc}\n"
       exit 1
     else
-      curl -X POST http://127.0.0.1:$(($p2p_port+1000))/restart > /dev/null 2>&1
+      curl -X POST --unix-socket /tmp/solar/solar-core/mainnet/round-monitor.sock http://127.0.0.1/restart > /dev/null 2>&1
       echo -e "\n${green}Restart requested. Check logs to monitor progress.${nc}"
     fi
 
